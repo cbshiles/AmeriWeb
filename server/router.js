@@ -28,42 +28,46 @@ function route(req, res){ //route various requests to their proper functions
 
     //special treatment
     if (xten == 'html'){
-    
+
 	function include(url) { //function to include a script to the html file
 	    res.write('<script src="'+url+'"> </script>')
 	}
 
+//function to begin a header maybe?
+
 	readF = function(err, data) {
-	    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'})
+	    res.write('<!DOCTYPE html>')
+	    res.write('<head><link rel="stylesheet" type="text/css" href="slide.css"></head>')
 	    include('http://code.jquery.com/jquery-1.11.1.min.js')
-	    
-	    if (/*name is parseable into a number*/){
+	    if (! isNaN(parseInt(name.substring(1)))){/*name is parseable into a number*/
+		console.log("yoo doo loo loo")
 		//have the first character of the name be a letter denoting which set it belongs to
 		//have this letter determine the css (look up some good free css pages you can use)
-		include('slide.css') //is this the right way to include css? check
+//		include('slide.css') //is this the right way to include css? check
 		
 		//the rest of the name is a number that says which slide in the order it is
 		var nnum = 0//parsed value, name num
 		if (nnum > 0)
 		    ;//have a back redirect
 
+		pages = 10 //# need to remove later
 		if (nnum < pages) // need to actually set pages (max # of pages) above
 		    ;//have a forward redirect
 
-		include('slideA.js') //js prep, defintions etc
+//		include('slideA.js') //js prep, defintions etc
 		res.write(data) //write actual text file's content
-		include('slideB.js') //js execution, after setting of variables in data
+//		include('slideB.js') //js execution, after setting of variables in data
 	    }
 	    else {
 		include(name+'.js')
-		include('home.css') //is this the right way to include css? check
+//		include('home.css') //is this the right way to include css? check
 		res.write(data)
 	    }
 	    res.end
 	}
     }
 
-    if (/* xten == jpg or png or etc..*/)
+    if (4 < 2 /* xten == jpg or png or etc..*/)
 	final_path = "./img"+path
     
     fs.readFile(final_path, readF)
