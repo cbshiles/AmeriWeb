@@ -33,37 +33,41 @@ function route(req, res){ //route various requests to their proper functions
 	    res.write('<script src="'+url+'"> </script>')
 	}
 
-//function to begin a header maybe?
+	function seize(url) { //function to include a css file to the html
+	    res.write('<link rel="stylesheet" type="text/css" href="'+url+'">')
+	}
 
-	readF = function(err, data) {
+	readF = function(err, data) { //the official html reader function
 	    res.write('<!DOCTYPE html>')
-	    res.write('<head><link rel="stylesheet" type="text/css" href="slide.css"></head>')
+	    res.write('<html><head>')
+
+	    var slideNum = parseInt(name.substring(1))/*name(minus 1st char) is parseable into a number*/
+	    var isSlide = ! isNaN(slideNum) 
+	    if (isSlide) seize(name.substring(0,1)+".css") //each slide show has own css, each slide corresponds to a letter
+	    else seize('home.css')
+
+	    res.write('</head>')
 	    include('http://code.jquery.com/jquery-1.11.1.min.js')
-	    if (! isNaN(parseInt(name.substring(1)))){/*name is parseable into a number*/
-		console.log("yoo doo loo loo")
-		//have the first character of the name be a letter denoting which set it belongs to
-		//have this letter determine the css (look up some good free css pages you can use)
-//		include('slide.css') //is this the right way to include css? check
-		
-		//the rest of the name is a number that says which slide in the order it is
-		var nnum = 0//parsed value, name num
-		if (nnum > 0)
+	    
+	    if (isSlide){
+		if (slideNum > 0)
 		    ;//have a back redirect
 
-		pages = 10 //# need to remove later
-		if (nnum < pages) // need to actually set pages (max # of pages) above
+		pages = 10 //# need to remove later, or just make them equal
+		if (slideNum < pages) // need to actually set pages (max # of pages) above
 		    ;//have a forward redirect
 
 //		include('slideA.js') //js prep, defintions etc
 		res.write(data) //write actual text file's content
 //		include('slideB.js') //js execution, after setting of variables in data
 	    }
-	    else {
+	    
+	    else { //non sequential pages all have their own js
 		include(name+'.js')
-//		include('home.css') //is this the right way to include css? check
 		res.write(data)
 	    }
-	    res.end
+
+	    res.end("</html>")
 	}
     }
 

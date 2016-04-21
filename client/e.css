@@ -1,0 +1,17 @@
+/*Energy style!*/
+p{
+    text-align: center;
+    color: red;
+} 
+
+ul.a {
+    list-style-type: circle;
+}
+
+/*
+<ul class="a">
+  <li>Coffee</li>
+  <li>Tea</li>
+  <li>Coca Cola</li>
+</ul>
+*/
