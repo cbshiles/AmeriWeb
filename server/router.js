@@ -1,14 +1,35 @@
+//This is for creating all the websites, besides the hard coded page material
+
+//Client side js is for sending requests back to this router, or dynamically chaning the view
+
 var http = require('http'),
-url = require('url'),
-fs = require('fs');
+    url = require('url'),
+    fs = require('fs');
+
+function cat(lzt){
+    var str = lzt[0]
+    for (var i=1; i<lzt.length; i++){
+	str = str.concat(lzt[i])
+    }
+    return str
+}
+
+function Que(q, ops){
+	var butts = ""//button code
+	for (var i=0; i<ops.length; i++){
+	    butts = butts.concat(cat(["<input type=\"radio\" name=\"", q, "\" value=\"", ops[i], "\"> ", ops[i]]))
+	}
+	return cat(["<form>", q, butts, "\n</form>"])
+}
 
 function route(req, res){ //route various requests to their proper functions
+
+    var home = 'index.html'
     
-    console.log(req.method) // probably remove
+    //console.log(req.method)
 
     var path = url.parse(req.url).pathname
 
-    var home = 'index.html'
     if (path == '/') path += home //if main address, redirect to homepage
 
     var xten_pos = path.search(/\.[a-z]+$/) //last period, or something (look it up)
@@ -59,65 +80,44 @@ function route(req, res){ //route various requests to their proper functions
 		if (slideNum < pages) // need to actually set pages (max # of pages) above
 		    ;//have a forward redirect
 
-//		include('slideA.js') //js prep, defintions etc
+		//		include('slideA.js') //js prep, defintions etc
 		res.write(data) //write actual text file's content
-//		include('slideB.js') //js execution, after setting of variables in data
+		//		include('slideB.js') //js execution, after setting of variables in data
 	    }
 
 	    else if (name.substring(1).localeCompare("survey") == 0){
-//doesnt include a client side javascript page yet
-
-
-		function cat(lzt){
-		    var str = lzt[0]
-		    for (var i=1; i<lzt.length; i++){
-			str = str.concat(lzt[i])
-		    }
-		    return str
-		}
-
-		function Que(q, ops){
-		    this.q = q;
-		    this.ops = ops;
-
-		    this.text = function(){
-			var butts = ""//button code
-			for (var i=0; i<this.ops.length; i++){
-			    butts = butts.concat(cat(["<input type=\"radio\" name=\"", this.q, "\" value=\"", this.ops[i], "\"> ", this.ops[i]]))
-			}
-			return cat(["<form>", this.q, butts, "\n</form>"])
-		    }
-
-		    res.write(this.text())
-		}
+		//doesnt include a client side javascript page yet
 
 		var yni = ["Yes", "No", "Indifferent"];
 
+		function qw(a, b){//Que write
+		    res.write(new Que(a,b).text())
+		}
 
 		if (e){
 		    //energy
-		    new Que("I can now easily identify ways to save energy in my daily life.", yni)
-		    new Que("I understand and can explain how saving energy can reduce my environmental footprint.", yni)
-		    new Que("I am more likely to modify my behavior to improve energy efficiency.", yni)
-		    new Que("Being environmentally conscious improves the environment.", yni)
+		    qw("I can now easily identify ways to save energy in my daily life.", yni)
+		    qw("I understand and can explain how saving energy can reduce my environmental footprint.", yni)
+		    qw("I am more likely to modify my behavior to improve energy efficiency.", yni)
+		    qw("Being environmentally conscious improves the environment.", yni)
 		} else {
 		    //housing
-		    new Que("I have an increased knowledge and/or ability to access appropriate housing.", yni)
-		    new Que("I am more likely to pursue services and support available to me.", yni)
-		    new Que("I have a better understanding of how to manage resources.", yni)
+		    qw("I have an increased knowledge and/or ability to access appropriate housing.", yni)
+		    qw("I am more likely to pursue services and support available to me.", yni)
+		    qw("I have a better understanding of how to manage resources.", yni)
 		}
 
 		//about yourself (optional) (and the same for each survey)
-		new Que("Gender:", ["Female", "Male"])
-		new Que("I live in a:", ["Rural Area", "Urban Area"])
-		new Que("Income Level:", ["Low", "Moderate", "High"])
-		new Que("Education Level:", ["Did Not Graduate High School",
+		qw("Gender:", ["Female", "Male"])
+		qw("I live in a:", ["Rural Area", "Urban Area"])
+		qw("Income Level:", ["Low", "Moderate", "High"])
+		qw("Education Level:", ["Did Not Graduate High School",
 					     "High School Graduate / GED", 
 					     "College Degree or Higher"])
 
-		}
+	    }
 	    
-	    else { //non sequential pages all have their own js
+	    else { //other non sequential pages all have their own js
 
 		include(name+'.js')
 		res.write(data)
@@ -127,7 +127,8 @@ function route(req, res){ //route various requests to their proper functions
 	}
     }
 
-    if (4 < 2 /* xten == jpg or png or etc..*/)
+    //test this
+    if (/(jpg|jpeg|png)/.test(xten))
 	final_path = "./img"+path
     
     fs.readFile(final_path, readF)
@@ -137,6 +138,5 @@ function launch(port){
     http.createServer(route).listen(port) //, 'localhost')
     console.log('Server running on '+port+'.')
 }
-
 
 launch(8888)
