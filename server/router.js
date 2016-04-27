@@ -2,6 +2,13 @@
 
 //Client side js is for sending requests back to this router, or dynamically chaning the view
 
+var sys = require('sys')
+
+var exec = require('child_process').exec;
+
+function puts(error, stdout, stderr) { sys.puts(stdout) }
+
+
 var http = require('http'),
     url = require('url'),
     fs = require('fs');
@@ -12,6 +19,12 @@ function cat(lzt){
 	str = str.concat(lzt[i])
     }
     return str
+}
+
+function prall(obj){
+    for (var pName in obj){
+	console.log(pName, obj[pName])
+    }
 }
 
 function Que(q, ops){
@@ -26,7 +39,7 @@ function route(req, res){ //route various requests to their proper functions
 
     var home = 'index.html'
     
-    //console.log(req.method)
+    console.log(req.method)
 
     var path = url.parse(req.url).pathname
 
@@ -38,6 +51,8 @@ function route(req, res){ //route various requests to their proper functions
 
     var readF //this function will be set as the appropriate read function for the file
 
+    console.log(name)
+
     function basic(err, data) { //most simple reader function
 	if (err) return console.log(err)
 	res.end(data)
@@ -48,6 +63,15 @@ function route(req, res){ //route various requests to their proper functions
     final_path = './client'+path    
 
     //special treatment
+
+    if (xten == 'js'){
+	if (name == 'info_form'){
+	    var queryData = url.parse(req.url, true).query;
+	    exec("echo '"+queryData.fullname+" "+queryData.age+"' > infos/"+queryData.fullname+".txt", puts);
+	    return
+	}
+}
+
     if (xten == 'html'){
 
 	function include(url) { //function to include a script to the html file
@@ -73,12 +97,18 @@ function route(req, res){ //route various requests to their proper functions
 	    include('http://code.jquery.com/jquery-1.11.1.min.js')
 	    
 	    if (isSlide){
-		if (slideNum > 0)
-		    ;//have a back redirect
+		if (slideNum > 0){
+		        var sn = (slideNum-1).toString()
+		        res.write(cat(["<a href='", id, sn, "'>Back</a>"]));//have a back redirect
+		    }
 
 		pages = 10 //# need to remove later, or just make them equal
-		if (slideNum < pages) // need to actually set pages (max # of pages) above
-		    ;//have a forward redirect
+// need to actually set pages (max # of pages) above
+		if (slideNum < pages){
+		    var sn = (slideNum+1).toString()
+		    res.write(cat(["<a href='", id, sn, "'>Next</a>"]));//have a forward redirect
+		}
+
 
 		//		include('slideA.js') //js prep, defintions etc
 		res.write(data) //write actual text file's content
