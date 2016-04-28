@@ -129,7 +129,7 @@ function route(req, res){ //route various requests to their proper functions
 		var yni = ["Yes", "No", "Indifferent"];
 
 		function qw(a, b){//Que write
-		    var strrl = new Que(a,b)
+		    var strrl = Que(a,b)
 		    console.log("THIS IS STRR: "+typeof strrl+"\n")
 		    res.write(""+strrl)
 		}
