@@ -18,6 +18,7 @@ function cat(lzt){
     for (var i=1; i<lzt.length; i++){
 	str = str.concat(lzt[i])
     }
+    console.log("str: "+str)
     return str
 }
 
@@ -28,11 +29,15 @@ function prall(obj){
 }
 
 function Que(q, ops){
+    console.log("q: "+q)
+    console.log("ops: "+ops)
 	var butts = ""//button code
 	for (var i=0; i<ops.length; i++){
 	    butts = butts.concat(cat(["<input type=\"radio\" name=\"", q, "\" value=\"", ops[i], "\"> ", ops[i]]))
 	}
-	return cat(["<form>", q, butts, "\n</form>"])
+    var retstr = cat([q, butts])
+    console.log("____++_>"+ retstr + " "+typeof retstr)
+    return retstr
 }
 
 function route(req, res){ //route various requests to their proper functions
@@ -70,7 +75,10 @@ function route(req, res){ //route various requests to their proper functions
 	    exec("echo '"+queryData.fullname+" "+queryData.age+"' > infos/"+queryData.fullname+".txt", puts);
 	    return
 	}
-}
+	else if (name == 'survey_form'){
+	    console.log("burritoes")
+	}
+    }
 
     if (xten == 'html'){
 
@@ -121,8 +129,12 @@ function route(req, res){ //route various requests to their proper functions
 		var yni = ["Yes", "No", "Indifferent"];
 
 		function qw(a, b){//Que write
-		    res.write(new Que(a,b).text())
+		    var strrl = new Que(a,b)
+		    console.log("THIS IS STRR: "+typeof strrl+"\n")
+		    res.write(""+strrl)
 		}
+
+		res.write('<form action="survey_form.js" method="get">') //open form
 
 		if (e){
 		    //energy
@@ -144,6 +156,8 @@ function route(req, res){ //route various requests to their proper functions
 		qw("Education Level:", ["Did Not Graduate High School",
 					     "High School Graduate / GED", 
 					     "College Degree or Higher"])
+
+		res.write("</form>")
 
 	    }
 	    
