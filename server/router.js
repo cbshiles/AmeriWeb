@@ -18,7 +18,6 @@ function cat(lzt){
     for (var i=1; i<lzt.length; i++){
 	str = str.concat(lzt[i])
     }
-    console.log("str: "+str)
     return str
 }
 
@@ -29,14 +28,12 @@ function prall(obj){
 }
 
 function Que(q, ops){
-    console.log("q: "+q)
-    console.log("ops: "+ops)
 	var butts = ""//button code
 	for (var i=0; i<ops.length; i++){
-	    butts = butts.concat(cat(["<input type=\"radio\" name=\"", q, "\" value=\"", ops[i], "\"> ", ops[i]]))
+	    butts = butts.concat(cat(["<input type=\"radio\" name=\"", q, "\" value=\"", ops[i], "\"> ", ops[i],
+				     "<br>"]))
 	}
-    var retstr = cat([q, butts])
-    console.log("____++_>"+ retstr + " "+typeof retstr)
+    var retstr = cat([q, "<br>", butts,"<br>"])
     return retstr
 }
 
@@ -107,18 +104,19 @@ function route(req, res){ //route various requests to their proper functions
 	    if (isSlide){
 		if (slideNum > 0){
 		        var sn = (slideNum-1).toString()
-		        res.write(cat(["<a href='", id, sn, "'>Back</a>"]));//have a back redirect
+		        res.write(cat(["<a href='", id, sn, ".html'>Back</a>"]));//have a back redirect
 		    }
 
-		pages = 10 //# need to remove later, or just make them equal
+		pages =  5//# need to remove later, or just make them equal
 // need to actually set pages (max # of pages) above
 		if (slideNum < pages){
 		    var sn = (slideNum+1).toString()
-		    res.write(cat(["<a href='", id, sn, "'>Next</a>"]));//have a forward redirect
+		    res.write(cat(["<a href='", id, sn, ".html'>Next</a>"]));//have a forward redirect
 		}
 
 
 		//		include('slideA.js') //js prep, defintions etc
+		console.log(name)
 		res.write(data) //write actual text file's content
 		//		include('slideB.js') //js execution, after setting of variables in data
 	    }
@@ -130,11 +128,10 @@ function route(req, res){ //route various requests to their proper functions
 
 		function qw(a, b){//Que write
 		    var strrl = Que(a,b)
-		    console.log("THIS IS STRR: "+typeof strrl+"\n")
-		    res.write(""+strrl)
+		    res.write(strrl)
 		}
-
-		res.write('<form action="survey_form.js" method="get">') //open form
+  
+		res.write('<form action="survey_form.js" method="get"><fieldset><legend>Evaluation Survey</legend>') //open form
 
 		if (e){
 		    //energy
@@ -157,7 +154,7 @@ function route(req, res){ //route various requests to their proper functions
 					     "High School Graduate / GED", 
 					     "College Degree or Higher"])
 
-		res.write("</form>")
+		res.write("<input type='submit' value='Submit'></fieldset></form>")
 
 	    }
 	    
