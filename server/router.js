@@ -8,6 +8,12 @@ var exec = require('child_process').exec;
 
 function puts(error, stdout, stderr) { sys.puts(stdout) }
 
+function date_string(dt){
+    console.log(typeof dt)
+    return dt.getFullYear() +"/"+ ("0" + (dt.getMonth()+1)).slice(-2) +"/"+
+    ("0" + dt.getDate()).slice(-2)
+}
+
 
 var http = require('http'),
     url = require('url'),
@@ -66,16 +72,7 @@ function route(req, res){ //route various requests to their proper functions
 
     //special treatment
 
-    if (xten == 'js'){
-	if (name == 'info_form'){
-	    var queryData = url.parse(req.url, true).query;
-	    exec("echo '"+queryData.fullname+" "+queryData.age+"' > infos/"+queryData.fullname+".txt", puts);
-	    return
-	}
-	else if (name == 'survey_form'){
-	    console.log("burritoes")
-	}
-    }
+    //American themed! - actually might make things alot easier
 
     if (xten == 'html'){
 
@@ -86,6 +83,9 @@ function route(req, res){ //route various requests to their proper functions
 	function seize(url) { //function to include a css file to the html
 	    res.write('<link rel="stylesheet" type="text/css" href="'+url+'">')
 	}
+
+
+	
 
 	readF = function(err, data) { //the official html reader function
 	    res.write('<!DOCTYPE html>')
@@ -109,20 +109,30 @@ function route(req, res){ //route various requests to their proper functions
 
 		pages =  5//# need to remove later, or just make them equal
 // need to actually set pages (max # of pages) above
+
+		var page
 		if (slideNum < pages){
 		    var sn = (slideNum+1).toString()
-		    res.write(cat(["<a href='", id, sn, ".html'>Next</a>"]));//have a forward redirect
+		    page = ""+id+sn
+		    res.write(cat(["<a href='", page, ".html'>Next</a>"]));//have a forward redirect
 		}
+		else {page = "info"
+		      var letta = e?"e":"h"
+		      res.write(cat(["<a href='", page, ".html?letter=", letta, "'>Next</a>"]));//have a forward redirect
+		     }
+
 
 
 		//		include('slideA.js') //js prep, defintions etc
 		console.log(name)
-		res.write(data) //write actual text file's content
+//		res.write(data) //write actual text file's content
 		//		include('slideB.js') //js execution, after setting of variables in data
 	    }
 
 	    else if (name.substring(1).localeCompare("survey") == 0){
-		//doesnt include a client side javascript page yet
+
+		var queryData = url.parse(req.url, true).query;
+		exec("echo '"+queryData.fullname+" "+queryData.age+" "+queryData.letter+" "+queryData.date+"' >> infos.txt", puts);
 
 		var yni = ["Yes", "No", "Indifferent"];
 
@@ -130,8 +140,13 @@ function route(req, res){ //route various requests to their proper functions
 		    var strrl = Que(a,b)
 		    res.write(strrl)
 		}
+
+		// function qwo(a, b){//optional version of qw
+		//     b.push("I prefer not to answer.")
+		//     qw(a, b)
+		// }
   
-		res.write('<form action="survey_form.js" method="get"><fieldset><legend>Evaluation Survey</legend>') //open form
+		res.write('<form action="survey_form.html" method="get"><fieldset><legend>Evaluation Survey</legend>') //open form
 
 		if (e){
 		    //energy
@@ -158,10 +173,27 @@ function route(req, res){ //route various requests to their proper functions
 
 	    }
 	    
-	    else { //other non sequential pages all have their own js
+	    /* The reception office --- */
+	    else if (name == 'info_form'){
 
-		include(name+'.js')
-		res.write(data)
+	    }
+	    else if (name == 'survey_form'){
+		var queryData = url.parse(req.url, true).query;
+		console.log(Object.keys(queryData))
+	    }
+	    else if (name == 'info'){
+		var lett = url.parse(req.url, true).query.letter
+		res.write('<form action="'+lett+'survey.html" method="get">')
+	    }
+
+	/* ----The reception office */
+	    
+	    res.write(data)
+	    if (name == 'info'){
+		var lett = url.parse(req.url, true).query.letter
+		res.write('<input type="hidden" name="letter" value="' + lett  + '">')
+		res.write('<input type="hidden" name="date" value="'
+			  + date_string(new Date())  + '"></form>')
 	    }
 
 	    res.end("</html>")
