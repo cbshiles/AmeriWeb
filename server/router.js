@@ -43,6 +43,15 @@ function Que(q, ops){
     return retstr
 }
 
+function f_append(fname){
+    return function(str){
+	exec("echo '"+str+"' >> "+fname, puts);
+    }
+}
+
+
+
+
 function route(req, res){ //route various requests to their proper functions
 
     var home = 'index.html'
@@ -121,18 +130,13 @@ function route(req, res){ //route various requests to their proper functions
 		      res.write(cat(["<a href='", page, ".html?letter=", letta, "'>Next</a>"]));//have a forward redirect
 		     }
 
-
-
-		//		include('slideA.js') //js prep, defintions etc
-		console.log(name)
-//		res.write(data) //write actual text file's content
-		//		include('slideB.js') //js execution, after setting of variables in data
 	    }
 
 	    else if (name.substring(1).localeCompare("survey") == 0){
 
 		var queryData = url.parse(req.url, true).query;
-		exec("echo '"+queryData.fullname+" "+queryData.age+" "+queryData.letter+" "+queryData.date+"' >> infos.txt", puts);
+
+		f_append("infos.txt")(queryData.fullname+" "+queryData.age+" "+queryData.letter+" "+queryData.date)//flashy
 
 		var yni = ["Yes", "No", "Indifferent"];
 
@@ -174,12 +178,17 @@ function route(req, res){ //route various requests to their proper functions
 	    }
 	    
 	    /* The reception office --- */
-	    else if (name == 'info_form'){
-
-	    }
 	    else if (name == 'survey_form'){
+
+		var pend = f_append("surveys.txt")
 		var queryData = url.parse(req.url, true).query;
-		console.log(Object.keys(queryData))
+		var arr = Object.keys(queryData)
+
+		for (var i=0; i<arr.length; i++){
+		    var k = arr[i]
+		    pend(queryData[k])
+		}
+		pend("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	    }
 	    else if (name == 'info'){
 		var lett = url.parse(req.url, true).query.letter
