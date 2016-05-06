@@ -186,7 +186,7 @@ function route(req, res){ //route various requests to their proper functions
 
 		for (var i=0; i<arr.length; i++){
 		    var k = arr[i]
-		    pend(queryData[k])
+		    pend(k+"~"+queryData[k])
 		}
 		pend("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	    }

@@ -1,14 +1,12 @@
-Both surveys and info should be kept in a single text file, which is on github and maybe another backup.
-
-each new submission causes an additional line to be appended to the text file, in a certain style
-
-cleanse the strings of tildes, and then use them as separators between different properties on the same line
-
-this is important need to do this stuff
-
-i can use any language i want to analyze the data, python should be it,
-good graphing capabilities as well as just easy in general
-
-the info page really needs work REALLY!
+remember python's graphing capabilities
 
 so do the content pages. how are we going to place those directional links??
+
+id also like to stylize those next and back links
+
+the very front page sux, but no biggie
+so does the info page, chop chop
+
+tonight's focus is going to crank out a few pages for each of these presentations
+
+one part of this will be figuring out how to use a variable number of slides for that loop that provides links

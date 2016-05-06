@@ -1,9 +1,18 @@
-Indifferent
-Yes
-Yes
-No
-Female
-Rural Area
-Moderate
-Did Not Graduate High School
+I can now easily identify ways to save energy in my daily life.~Yes
+I understand and can explain how saving energy can reduce my environmental footprint.~No
+I am more likely to modify my behavior to improve energy efficiency.~Yes
+Being environmentally conscious improves the environment.~No
+Gender:~Female
+I live in a:~Urban Area
+Income Level:~Low
+Education Level:~High School Graduate / GED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I can now easily identify ways to save energy in my daily life.~No
+I understand and can explain how saving energy can reduce my environmental footprint.~Yes
+I am more likely to modify my behavior to improve energy efficiency.~Yes
+Being environmentally conscious improves the environment.~Yes
+Gender:~Male
+I live in a:~Rural Area
+Income Level:~Low
+Education Level:~College Degree or Higher
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
