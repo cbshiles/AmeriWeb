@@ -8,6 +8,11 @@ ul.a {
     list-style-type: circle;
 }
 
+a.left_butt {
+    position: relative;
+    left: 100px;
+}
+
 /*
 <ul class="a">
   <li>Coffee</li>

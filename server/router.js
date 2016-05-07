@@ -104,32 +104,35 @@ function route(req, res){ //route various requests to their proper functions
 	    var isSlide = ! isNaN(slideNum) 
 	    var id = name.substring(0,1)
 	    var e = (id.localeCompare("e") == 0) //is it an energy slide?
+	    var pages = e? 4:3 //4 energy slides, 3 housing
 	    if (isSlide) seize(id+".css") //each slide show has own css, each slide corresponds to a letter
 	    else seize('home.css')
 
 	    res.write('</head>')
 	    include('http://code.jquery.com/jquery-1.11.1.min.js')
+
+	    res.write("<div>")
 	    
 	    if (isSlide){
 		if (slideNum > 0){
 		        var sn = (slideNum-1).toString()
-		        res.write(cat(["<a href='", id, sn, ".html'>Back</a>"]));//have a back redirect
-		    }
+		    res.write(cat(["<a href='", id, sn, ".html'"+'><img src="left_arrow.jpg"></a>']));//have a back redirect
 
-		pages =  5//# need to remove later, or just make them equal
-// need to actually set pages (max # of pages) above
+
+		}
 
 		var page
 		if (slideNum < pages){
 		    var sn = (slideNum+1).toString()
 		    page = ""+id+sn
-		    res.write(cat(["<a href='", page, ".html'>Next</a>"]));//have a forward redirect
+		    res.write(cat(["<a class='left_butt' href='", page, ".html'"+'><img src="right_arrow.jpg"></a>']));//have a forward redirect		    
 		}
 		else {page = "info"
 		      var letta = e?"e":"h"
-		      res.write(cat(["<a href='", page, ".html?letter=", letta, "'>Next</a>"]));//have a forward redirect
+		      res.write(cat(["<a class='left_butt' href='", page, '.html?letter='+ letta+ "'><img src="+'"right_arrow.jpg"></a>']));//have a forward redirect		    
 		     }
 
+		res.write("</div>")
 	    }
 
 	    else if (name.substring(1).localeCompare("survey") == 0){
