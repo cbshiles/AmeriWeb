@@ -116,7 +116,7 @@ function route(req, res){ //route various requests to their proper functions
 	    if (isSlide){
 		if (slideNum > 0){
 		        var sn = (slideNum-1).toString()
-		    res.write(cat(["<a href='", id, sn, ".html'"+'><img src="left_arrow.jpg"></a>']));//have a back redirect
+		    res.write(cat(["<a class='right_butt' href='", id, sn, ".html'"+'><img src="left_arrow.jpg"></a>']));//have a back redirect
 
 
 		}
@@ -133,6 +133,19 @@ function route(req, res){ //route various requests to their proper functions
 		     }
 
 		res.write("</div>")
+
+		res.write("<div class='main'>")
+		res.write("<img src='left_banner.jpg' class='l_banner' >")
+
+		
+		res.write("<div class='text'>")
+		res.write(data)
+		res.write("</div>")
+
+		res.write("<img src='right_banner.jpg' class='r_banner' >")
+		
+		res.end("</div></html>")
+		return
 	    }
 
 	    else if (name.substring(1).localeCompare("survey") == 0){
