@@ -81,8 +81,6 @@ function route(req, res){ //route various requests to their proper functions
 
     //special treatment
 
-    //American themed! - actually might make things alot easier
-
     if (xten == 'html'){
 
 	function include(url) { //function to include a script to the html file
@@ -118,7 +116,9 @@ function route(req, res){ //route various requests to their proper functions
 		        var sn = (slideNum-1).toString()
 		    res.write(cat(["<a class='right_butt' href='", id, sn, ".html'"+'><img src="left_arrow.jpg"></a>']));//have a back redirect
 
-
+		}
+		else { //redirect to home page
+res.write(cat(["<a class='right_butt' href='index.html'"+'><img src="left_arrow.jpg"></a>']));
 		}
 
 		var page
@@ -135,14 +135,14 @@ function route(req, res){ //route various requests to their proper functions
 		res.write("</div>")
 
 		res.write("<div class='main'>")
-		res.write("<img src='left_banner.jpg' class='l_banner' >")
+		res.write("<img src='"+(e?"left_banner.jpg":"blurk.png")+"' class='l_banner' >")
 
 		
 		res.write("<div class='text'>")
 		res.write(data)
 		res.write("</div>")
 
-		res.write("<img src='right_banner.jpg' class='r_banner' >")
+		res.write("<img src='"+(e?"right_banner.jpg":"blurk.png")+"' class='r_banner' >")
 		
 		res.end("</div></html>")
 		return
@@ -208,7 +208,7 @@ function route(req, res){ //route various requests to their proper functions
 	    }
 	    else if (name == 'info'){
 		var lett = url.parse(req.url, true).query.letter
-		res.write('<form action="'+lett+'survey.html" method="get">')
+		res.write('<form action="'+lett+'survey.html" method="get"><fieldset><legend>Personal Info</legend>')
 	    }
 
 	/* ----The reception office */
@@ -218,7 +218,7 @@ function route(req, res){ //route various requests to their proper functions
 		var lett = url.parse(req.url, true).query.letter
 		res.write('<input type="hidden" name="letter" value="' + lett  + '">')
 		res.write('<input type="hidden" name="date" value="'
-			  + date_string(new Date())  + '"></form>')
+			  + date_string(new Date())  + '"></fieldset></form>')
 	    }
 
 	    res.end("</html>")

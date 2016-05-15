@@ -1,0 +1,15 @@
+div.pics {
+    width: 65%;
+    margin: 0 auto; 
+}
+
+div.text {
+    font-size: 22px;
+    width: 75%;
+    text-align: center;
+    margin: 0 auto; 
+}
+
+body {
+    background-color: rgb(200, 200, 200); 
+}
