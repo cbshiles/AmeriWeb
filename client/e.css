@@ -4,19 +4,37 @@ ul.a {
     list-style-type: circle;
 }
 
-a.right_butt {
-    position: absolute;
-    left: 10px;
-    top: 10px;
+div.left {
+    float: left;
+    height: 95%;
+    width:10%;
+    left-margin: 3%;
 }
 
-a.left_butt {
-    position: relative;
-    left: 90%;
+div.right {
+    float: right;
+    height: 95%;
+    width: 10%;
+    right-margin: 3%;
+    /* border: solid 1px black; */
+}
+
+
+img.left_butt {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+img.right_butt {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 h1 {
-        text-align: center;
+    text-align: center;
     font-size: 250%;
 }
 
@@ -26,40 +44,21 @@ h2 {
 }
 
 div.text {
-
-    position: relative;
-    top: -675px;
-
-    margin: auto;
-    width: 75%;
+    margin: 0 auto;
     color:rgb(10,10,150);
+    width: 70%;
 }
 
-div.bod{
-    font-size: 142%;
-}
 
-div.main {
-    position: absolute;
-    top: 115px;
-}
 
 img.r_banner {
-    position: absolute;
-    top: 0px;
-    left: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-l_img.banner {
-    position: absolute;
-    top: 0px;
-    left: 0%;
+img.l_banner {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-/*
-<ul class="a">
-  <li>Coffee</li>
-  <li>Tea</li>
-  <li>Coca Cola</li>
-</ul>
-*/

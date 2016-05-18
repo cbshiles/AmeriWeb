@@ -91,60 +91,83 @@ function route(req, res){ //route various requests to their proper functions
 	    res.write('<link rel="stylesheet" type="text/css" href="'+url+'">')
 	}
 
-
-	
-
 	readF = function(err, data) { //the official html reader function
+	    res.writeHead(200, { 'Content-Type': "text/html" });
 	    res.write('<!DOCTYPE html>')
-	    res.write('<html><head>')
+	    res.write('<html><head><base href="/">')
 
 	    var slideNum = parseInt(name.substring(1))/*name(minus 1st char) is parseable into a number*/
 	    var isSlide = ! isNaN(slideNum) 
 	    var id = name.substring(0,1)
 	    var e = (id.localeCompare("e") == 0) //is it an energy slide?
+
+	    var letta
+	    var l_arrow
+	    var r_arrow
+	    var l_banner
+	    var r_banner
+	    if (e){
+		letta = "e"
+		l_arrow = "'left_arrow.jpg'"
+		r_arrow = "'right_arrow.jpg'"
+	     l_banner = "'left_banner.jpg'"
+	     r_banner = "'right_banner.jpg'"
+	    } else {
+		letta = "h"
+		l_arrow = "'turq_left.png'"
+	     r_arrow = "'turq_right.png'"
+	     l_banner = "'blurk.png'"
+		r_banner = "'blurk.png'"
+	    }
+
 	    var pages = e? 4:3 //4 energy slides, 3 housing
 	    if (isSlide) seize(id+".css") //each slide show has own css, each slide corresponds to a letter
 	    else seize('home.css')
 
 	    res.write('</head>')
 	    include('http://code.jquery.com/jquery-1.11.1.min.js')
-
-	    res.write("<div>")
 	    
 	    if (isSlide){
+
+
+		
+		//LEFT!!!
+		res.write("<div class='left'>")
+
 		if (slideNum > 0){
-		        var sn = (slideNum-1).toString()
-		    res.write(cat(["<a class='right_butt' href='", id, sn, ".html'"+'><img src="left_arrow.jpg"></a>']));//have a back redirect
+		    var sn = (slideNum-1).toString()
+		    res.write(cat(["<a  href='", id, sn, ".html'"+'><img class="left_butt" src='+l_arrow+"></a>"]));//have a back redirect
 
 		}
 		else { //redirect to home page
-res.write(cat(["<a class='right_butt' href='index.html'"+'><img src="left_arrow.jpg"></a>']));
+		    res.write(cat(["<a href='index.html'"+'><img class="left_butt" src='+l_arrow+"></a>"]));
 		}
 
+		res.write("<img src="+l_banner+" class='l_banner' >")
+
+		res.write("</div>")
+
+				//RIGHT!!!
+		res.write("<div class='right'>")
 		var page
 		if (slideNum < pages){
 		    var sn = (slideNum+1).toString()
 		    page = ""+id+sn
-		    res.write(cat(["<a class='left_butt' href='", page, ".html'"+'><img src="right_arrow.jpg"></a>']));//have a forward redirect		    
+		    res.write(cat(["<a href='", page, ".html'"+'><img class="right_butt" src='+r_arrow+'></a>']));//have a forward redirect		    
 		}
 		else {page = "info"
-		      var letta = e?"e":"h"
-		      res.write(cat(["<a class='left_butt' href='", page, '.html?letter='+ letta+ "'><img src="+'"right_arrow.jpg"></a>']));//have a forward redirect		    
+		      res.write(cat(["<a  href='", page, '.html?letter='+ letta+ "'><img class='right_butt' src="+r_arrow+'></a>']));//have a forward redirect		    
 		     }
 
+		res.write("<img src="+r_banner+" class='r_banner' >")
 		res.write("</div>")
 
-		res.write("<div class='main'>")
-		res.write("<img src='"+(e?"left_banner.jpg":"blurk.png")+"' class='l_banner' >")
-
-		
+		//MIDDLE!!! (content)
 		res.write("<div class='text'>")
 		res.write(data)
 		res.write("</div>")
-
-		res.write("<img src='"+(e?"right_banner.jpg":"blurk.png")+"' class='r_banner' >")
 		
-		res.end("</div></html>")
+		res.end("</html>")
 		return
 	    }
 
@@ -224,6 +247,9 @@ res.write(cat(["<a class='right_butt' href='index.html'"+'><img src="left_arrow.
 	    res.end("</html>")
 	}
     }
+
+    if (xten == 'css')
+	res.writeHead(200, { 'Content-Type': "text/css" });
 
     //test this
     if (/(jpg|jpeg|png)/.test(xten))
