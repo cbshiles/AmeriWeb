@@ -53,6 +53,7 @@ div.text {
 
 img.r_banner {
     display: block;
+    margin-top: 3%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -61,4 +62,5 @@ img.l_banner {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 3%;
 }
