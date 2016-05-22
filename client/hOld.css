@@ -1,0 +1,64 @@
+/*Housing style!*/
+/*blurk.png*/
+
+ul.a {
+    list-style-type: circle;
+}
+
+
+a.right_butt {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+a.left_butt {
+    position: relative;
+    left: 90%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 250%;
+}
+
+h2 {
+    text-align: center;
+    font-size: 200%;
+}
+
+div.text {
+
+    position: relative;
+    top: -675px;
+
+    margin: auto;
+    width: 75%;
+    color:rgb(93,93,93);
+}
+
+div.bod{
+    font-size: 142%;
+}
+
+div.main {
+    position: absolute;
+    top: 115px;
+}
+
+img.r_banner {
+    position: absolute;
+    top: 0px;
+    left: 90%;
+}
+
+l_img.banner {
+    position: absolute;
+    top: 0px;
+    left: 0%;
+}
+
+body {
+    background-color: rgb(0, 0, 0); 
+}
+
