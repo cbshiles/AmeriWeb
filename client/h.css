@@ -43,6 +43,11 @@ img.right_butt {
     margin-right: auto;
 }
 
+div.link_list {
+    text-align: center;
+    font-size: 125%;
+}
+
 h1 {
     text-align: center;
     font-size: 250%;
@@ -91,3 +96,4 @@ img.l_banner {
 body {
     background-color: rgb(0, 0, 0); 
 }
+

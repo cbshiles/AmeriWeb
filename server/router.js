@@ -9,23 +9,13 @@ var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { sys.puts(stdout) }
 
 function date_string(dt){
-    console.log(typeof dt)
     return dt.getFullYear() +"/"+ ("0" + (dt.getMonth()+1)).slice(-2) +"/"+
-    ("0" + dt.getDate()).slice(-2)
+	("0" + dt.getDate()).slice(-2)
 }
-
 
 var http = require('http'),
     url = require('url'),
     fs = require('fs');
-
-function cat(lzt){
-    var str = lzt[0]
-    for (var i=1; i<lzt.length; i++){
-	str = str.concat(lzt[i])
-    }
-    return str
-}
 
 function prall(obj){
     for (var pName in obj){
@@ -34,12 +24,11 @@ function prall(obj){
 }
 
 function Que(q, ops){
-	var butts = ""//button code
-	for (var i=0; i<ops.length; i++){
-	    butts = butts.concat(cat(["<input type=\"radio\" name=\"", q, "\" value=\"", ops[i], "\"> ", ops[i],
-				     "<br>"]))
-	}
-    var retstr = cat([q, "<br>", butts,"<br>"])
+    var butts = ""//button code
+    for (var i=0; i<ops.length; i++){
+	butts = butts.concat("<input type=\"radio\" name=\"" + q + "\" value=\"" + ops[i] + "\"> " + ops[i] + "<br>")
+    }
+    var retstr = q + "<br>" + butts + "<br>"
     return retstr
 }
 
@@ -48,9 +37,6 @@ function f_append(fname){
 	exec("echo '"+str+"' >> "+fname, puts);
     }
 }
-
-
-
 
 function route(req, res){ //route various requests to their proper functions
 
@@ -67,7 +53,7 @@ function route(req, res){ //route various requests to their proper functions
     var xten = path.substring(xten_pos+1) //extension aka file type
 
     var readF //this function will be set as the appropriate read function for the file
-
+    
     console.log(name)
 
     function basic(err, data) { //most simple reader function
@@ -96,69 +82,87 @@ function route(req, res){ //route various requests to their proper functions
 	    res.write('<!DOCTYPE html>')
 	    res.write('<html><head><base href="/">')
 
-	    var slideNum = parseInt(name.substring(1))/*name(minus 1st char) is parseable into a number*/
-	    var isSlide = ! isNaN(slideNum) 
 	    var id = name.substring(0,1)
+	    var rest = name.substring(1) //name(minus 1st char) 
+	    var slideNum = parseInt(rest) //is parseable into a number
+	    var isSlide = ! isNaN(slideNum)
+
+
+	if (rest == "source"){
+	    slideNum = -1
+	    isSlide = true
+	    var sources
+	    if (id == 'e'){
+		sources = []
+	    } else {
+		sources = ["http://www.futureinhumanity.org/homeless-facts/?gclid=CLeZmPGn9swCFVclgQodPlcL_g"]
+	    }
+
+	    data = "<h2> Sources: </h2><br/><p>"
+	    var src
+	    for (var i in sources){
+		src = sources[i]
+		data += '<a href="'+src+'">'+src+"</a><br/><br/>"
+	    }
+	    data += "</p>"
+	}
+	    
+
 	    var e = (id.localeCompare("e") == 0) //is it an energy slide?
 
-	    var letta
 	    var l_arrow
 	    var r_arrow
 	    var l_banner
 	    var r_banner
 	    if (e){
-		letta = "e"
 		l_arrow = "'left_arrow.jpg'"
 		r_arrow = "'right_arrow.jpg'"
-	     l_banner = "'left_banner.jpg'"
-	     r_banner = "'right_banner.jpg'"
+		l_banner = "'left_banner.jpg'"
+		r_banner = "'right_banner.jpg'"
 	    } else {
-		letta = "h"
 		l_arrow = "'turq_left.png'"
-	     r_arrow = "'turq_right.png'"
-	     l_banner = "'blurk.png'"
-		r_banner = "'blurk.png'"
+		r_arrow = "'turq_right.png'"
+		l_banner = r_banner = "'blurk.png'"
 	    }
 
-	    var pages = e? 4:3 //4 energy slides, 3 housing
+	    var pages = e? 4:4 //energy slides, housing
 	    if (isSlide) seize(id+".css") //each slide show has own css, each slide corresponds to a letter
 	    else seize('home.css')
 
 	    res.write('</head>')
-	    include('http://code.jquery.com/jquery-1.11.1.min.js')
+//	    include('http://code.jquery.com/jquery-1.11.1.min.js')
 	    
-	    if (isSlide){
+	    if (isSlide){ 
+	    	
 
-
-		
 		//LEFT!!!
-		res.write("<div class='left'>")
+	    	var murl //for the back arrow
 
-		if (slideNum > 0){
-		    var sn = (slideNum-1).toString()
-		    res.write(cat(["<a  href='", id, sn, ".html'"+'><img class="left_butt" src='+l_arrow+"></a>"]));//have a back redirect
-
-		}
-		else { //redirect to home page
-		    res.write(cat(["<a href='index.html'"+'><img class="left_butt" src='+l_arrow+"></a>"]));
-		}
-
+	    	if (slideNum > 0){
+	    	    murl = id + (slideNum-1).toString()
+	    	} else if (slideNum == 0){
+	    	    murl = 'index'
+	    	} else { //source page
+		    murl = id + pages.toString()
+	    	}
+	    	res.write("<div class='left'>")
+	    	res.write("<a  href='" + murl + ".html'"+'><img class="left_butt" src='+l_arrow+"></a>");//have a back redirect
 		res.write("<img src="+l_banner+" class='l_banner' >")
-
 		res.write("</div>")
 
-				//RIGHT!!!
-		res.write("<div class='right'>")
-		var page
-		if (slideNum < pages){
-		    var sn = (slideNum+1).toString()
-		    page = ""+id+sn
-		    res.write(cat(["<a href='", page, ".html'"+'><img class="right_butt" src='+r_arrow+'></a>']));//have a forward redirect		    
-		}
-		else {page = "info"
-		      res.write(cat(["<a  href='", page, '.html?letter='+ letta+ "'><img class='right_butt' src="+r_arrow+'></a>']));//have a forward redirect		    
-		     }
+		//RIGHT!!!
 
+		if (slideNum == -1){ //source
+		    murl = "info.html?letter="+id
+		} else if (slideNum < pages) {
+		    murl = id + (slideNum+1).toString() + '.html'
+		    console.log("MURL: "+murl)
+		} else {
+		    murl = id+"source.html"
+		}
+
+		res.write("<div class='right'>")
+		res.write("<a  href='" + murl + "'><img class='right_butt' src="+r_arrow+'></a>');//have a forward redirect		    
 		res.write("<img src="+r_banner+" class='r_banner' >")
 		res.write("</div>")
 
@@ -188,7 +192,7 @@ function route(req, res){ //route various requests to their proper functions
 		//     b.push("I prefer not to answer.")
 		//     qw(a, b)
 		// }
-  
+		
 		res.write('<form action="survey_form.html" method="get"><fieldset><legend>Evaluation Survey</legend>') //open form
 
 		if (e){
@@ -209,8 +213,8 @@ function route(req, res){ //route various requests to their proper functions
 		qw("I live in a:", ["Rural Area", "Urban Area"])
 		qw("Income Level:", ["Low", "Moderate", "High"])
 		qw("Education Level:", ["Did Not Graduate High School",
-					     "High School Graduate / GED", 
-					     "College Degree or Higher"])
+					"High School Graduate / GED", 
+					"College Degree or Higher"])
 
 		res.write("<input type='submit' value='Submit'></fieldset></form>")
 
@@ -234,7 +238,7 @@ function route(req, res){ //route various requests to their proper functions
 		res.write('<form action="'+lett+'survey.html" method="get"><fieldset><legend>Personal Info</legend>')
 	    }
 
-	/* ----The reception office */
+	    /* ----The reception office */
 	    
 	    res.write(data)
 	    if (name == 'info'){

@@ -34,3 +34,14 @@ I live in a:~Rural Area
 Income Level:~Moderate
 Education Level:~High School Graduate / GED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I can now easily identify ways to save energy in my daily life.~Indifferent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I can now easily identify ways to save energy in my daily life.~Yes
+I understand and can explain how saving energy can reduce my environmental footprint.~No
+I am more likely to modify my behavior to improve energy efficiency.~Indifferent
+Being environmentally conscious improves the environment.~Indifferent
+Gender:~Male
+I live in a:~Rural Area
+Income Level:~Low
+Education Level:~College Degree or Higher
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
