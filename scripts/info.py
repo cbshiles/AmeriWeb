@@ -4,7 +4,7 @@ def get_lines(fname):
     f.close()
     return lines
 
-for ln in get_lines("infos.txt"):
+for ln in get_lines("data/infos.txt"):
     words = ln.split()
     i =  len(words)-3
     print("Name: ", " ".join(words[0:i]))

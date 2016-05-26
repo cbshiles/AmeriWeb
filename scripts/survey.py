@@ -43,7 +43,7 @@ def get_lines(fname):
 
 oak = Tree()
 
-for ln in get_lines("surveys.txt"):
+for ln in get_lines("data/surveys.txt"):
     if (not(ln[0] == '~')):
         qa = ln[:-1].split("~")
         oak.add(qa)

@@ -131,6 +131,7 @@ function route(req, res){ //route various requests to their proper functions
 
 	    res.write('</head>')
 //	    include('http://code.jquery.com/jquery-1.11.1.min.js')
+
 	    
 	    if (isSlide){ 
 	    	
@@ -179,7 +180,7 @@ function route(req, res){ //route various requests to their proper functions
 
 		var queryData = url.parse(req.url, true).query;
 
-		f_append("infos.txt")(queryData.fullname+" "+queryData.age+" "+queryData.letter+" "+queryData.date)//flashy
+		f_append("data/infos.txt")(queryData.fullname+" "+queryData.age+" "+queryData.letter+" "+queryData.date)//flashy
 
 		var yni = ["Yes", "No", "Indifferent"];
 
@@ -193,7 +194,7 @@ function route(req, res){ //route various requests to their proper functions
 		//     qw(a, b)
 		// }
 		
-		res.write('<form action="survey_form.html" method="get"><fieldset><legend>Evaluation Survey</legend>') //open form
+		res.write('<form name="surveyForm" action="survey_form.html" method="get" onsubmit="return validateForm()" ><fieldset><legend>Evaluation Survey</legend>') //open form
 
 		if (e){
 		    //energy
@@ -223,7 +224,7 @@ function route(req, res){ //route various requests to their proper functions
 	    /* The reception office --- */
 	    else if (name == 'survey_form'){
 
-		var pend = f_append("surveys.txt")
+		var pend = f_append("data/surveys.txt")
 		var queryData = url.parse(req.url, true).query;
 		var arr = Object.keys(queryData)
 
@@ -235,7 +236,7 @@ function route(req, res){ //route various requests to their proper functions
 	    }
 	    else if (name == 'info'){
 		var lett = url.parse(req.url, true).query.letter
-		res.write('<form action="'+lett+'survey.html" method="get"><fieldset><legend>Personal Info</legend>')
+		res.write('<form name="infoForm" onsubmit="return validateForm()" action="'+lett+'survey.html" method="get"><fieldset><legend>Personal Info</legend>')
 	    }
 
 	    /* ----The reception office */
@@ -248,6 +249,11 @@ function route(req, res){ //route various requests to their proper functions
 			  + date_string(new Date())  + '"></fieldset></form>')
 	    }
 
+	    if (rest == 'survey')
+		include(name+'.js')
+	    else if (name == 'info')
+		include('info.js')
+	    
 	    res.end("</html>")
 	}
     }

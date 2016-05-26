@@ -13,3 +13,5 @@ and only actually submit the data if they have. otherwise have a popup box compl
 remember python's graphing capabilities
 
 at the end, put a link to the other presentation
+
+fix that final page after completeing survey
