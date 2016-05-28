@@ -127,14 +127,12 @@ function route(req, res){ //route various requests to their proper functions
 
 	    var pages = e? 4:4 //energy slides, housing
 	    if (isSlide) seize(id+".css") //each slide show has own css, each slide corresponds to a letter
-	    else seize('home.css')
+	    else seize('home.css') //# needz to change
 
 	    res.write('</head>')
 //	    include('http://code.jquery.com/jquery-1.11.1.min.js')
 
-	    
 	    if (isSlide){ 
-	    	
 
 		//LEFT!!!
 	    	var murl //for the back arrow
@@ -157,7 +155,6 @@ function route(req, res){ //route various requests to their proper functions
 		    murl = "info.html?letter="+id
 		} else if (slideNum < pages) {
 		    murl = id + (slideNum+1).toString() + '.html'
-		    console.log("MURL: "+murl)
 		} else {
 		    murl = id+"source.html"
 		}
@@ -185,14 +182,8 @@ function route(req, res){ //route various requests to their proper functions
 		var yni = ["Yes", "No", "Indifferent"];
 
 		function qw(a, b){//Que write
-		    var strrl = Que(a,b)
-		    res.write(strrl)
+		    res.write(Que(a,b))
 		}
-
-		// function qwo(a, b){//optional version of qw
-		//     b.push("I prefer not to answer.")
-		//     qw(a, b)
-		// }
 		
 		res.write('<form name="surveyForm" action="survey_form.html" method="get" onsubmit="return validateForm()" ><fieldset><legend>Evaluation Survey</legend>') //open form
 
@@ -209,6 +200,8 @@ function route(req, res){ //route various requests to their proper functions
 		    qw("I have a better understanding of how to manage resources.", yni)
 		}
 
+		res.write("<h3> The remaining questions are optional: </h3>")
+
 		//about yourself (optional) (and the same for each survey)
 		qw("Gender:", ["Female", "Male"])
 		qw("I live in a:", ["Rural Area", "Urban Area"])
@@ -218,10 +211,8 @@ function route(req, res){ //route various requests to their proper functions
 					"College Degree or Higher"])
 
 		res.write("<input type='submit' value='Submit'></fieldset></form>")
-
 	    }
 	    
-	    /* The reception office --- */
 	    else if (name == 'survey_form'){
 
 		var pend = f_append("data/surveys.txt")
@@ -238,8 +229,6 @@ function route(req, res){ //route various requests to their proper functions
 		var lett = url.parse(req.url, true).query.letter
 		res.write('<form name="infoForm" onsubmit="return validateForm()" action="'+lett+'survey.html" method="get"><fieldset><legend>Personal Info</legend>')
 	    }
-
-	    /* ----The reception office */
 	    
 	    res.write(data)
 	    if (name == 'info'){

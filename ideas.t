@@ -15,3 +15,5 @@ remember python's graphing capabilities
 at the end, put a link to the other presentation
 
 fix that final page after completeing survey
+
+for survey, have darker background and the questions have to lighter backgrouond. need to have decent margins to showthis off
