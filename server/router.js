@@ -80,7 +80,7 @@ function route(req, res){ //route various requests to their proper functions
 	readF = function(err, data) { //the official html reader function
 	    res.writeHead(200, { 'Content-Type': "text/html" });
 	    res.write('<!DOCTYPE html>')
-	    res.write('<html><head><base href="/">')
+	    res.write('<html><head><base href="/" target="_blank">')
 
 	    var id = name.substring(0,1)
 	    var rest = name.substring(1) //name(minus 1st char) 
@@ -145,7 +145,7 @@ function route(req, res){ //route various requests to their proper functions
 		    murl = id + pages.toString()
 	    	}
 	    	res.write("<div class='left'>")
-	    	res.write("<a  href='" + murl + ".html'"+'><img class="left_butt" src='+l_arrow+"></a>");//have a back redirect
+	    	res.write("<a  href='" + murl + ".html'"+' target="_self"><img class="left_butt" src='+l_arrow+"></a>");//have a back redirect
 		res.write("<img src="+l_banner+" class='l_banner' >")
 		res.write("</div>")
 
@@ -160,7 +160,7 @@ function route(req, res){ //route various requests to their proper functions
 		}
 
 		res.write("<div class='right'>")
-		res.write("<a  href='" + murl + "'><img class='right_butt' src="+r_arrow+'></a>');//have a forward redirect		    
+		res.write('<a  href="' + murl + '" target="_self"><img class="right_butt" src='+r_arrow+'></a>');//have a forward redirect		    
 		res.write("<img src="+r_banner+" class='r_banner' >")
 		res.write("</div>")
 
