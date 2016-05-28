@@ -13,4 +13,6 @@ fix that final page after completeing survey
     at the end, put a link to the other presentation
 
 
+***needs to not crash when it cant find a file
+
 

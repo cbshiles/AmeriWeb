@@ -1,4 +1,4 @@
-<title>Americore Education Program</title>
+
 
 <div class="pics">
   <img src="americorps.png" id="americorps" >
@@ -7,16 +7,23 @@
 
 <div class="text">
   <p>
-    This website is part of the Americore education program. There are two different presentations below. You can take either one, or both. Just use the arrows to switch slides, and make sure to complete the personal info and survey pages at the end. <br/> Thank you so much for helping me do my job.
+    This website is part of the Americore education program. There are two different presentations below. You can take either one, or both. Just use the arrows to switch slides, and make sure to complete the survey page at the end. <br/> Thank you so much for helping me do my job.
   </p>
 
-  <p>
-    <button type="button" onClick="window.location = 'e0.html'" > Start </button>
-    Energy conservation presentation
-  </p>
+  <form name="loginForm" onsubmit="return validateForm()" action="beginSlides.x" method="get">
 
-  <p>
-    <button type="button" onClick="window.location = 'h0.html'"> Start </button>
-    Affordable housing presentation
-  </p>
+    <p> Name: <input type="text" name="fullname"> </p>
+    <p> Age:  <input type="radio" name="age" value="youth"> Youth
+      <input type="radio" name="age" value="adult">Adult </p>
+    
+    <p>
+      <input type="submit" name="energy" value="Start" >
+      Energy conservation presentation
+    </p>
+
+    <p>
+      <input type="submit" name="housing" value="Start" >
+      Affordable housing presentation
+    </p>
+  </form>
 </div>

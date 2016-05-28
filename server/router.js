@@ -66,6 +66,28 @@ function route(req, res){ //route various requests to their proper functions
     final_path = './client'+path    
 
     //special treatment
+    if (name+'.'+xten == 'beginSlides.x'){
+
+// 	var queryData = url.parse(req.url, true).query;
+// 	var file
+// 	if (queryData['energy'] == '' || queryData['energy'] == null){
+// 	    file = 'h'
+// 	} else {
+// 	    file = 'e'
+// 	}
+
+
+	
+// 	xten = 'html'
+// 	final_path = 'client/'+file+'0.html'
+//	data =     fs.readFile(final_path, readF)
+// 	request(final_path, readF)
+// 	return
+
+	req.path = req.url = 'e0.html'
+	route(req, res)
+	return
+    }
 
     if (xten == 'html'){
 
@@ -129,7 +151,7 @@ function route(req, res){ //route various requests to their proper functions
 	    if (isSlide) seize(id+".css") //each slide show has own css, each slide corresponds to a letter
 	    else seize('home.css') //# needz to change
 
-	    res.write('</head>')
+	    res.write('</head><body><title>Americore Education Program</title>')
 //	    include('http://code.jquery.com/jquery-1.11.1.min.js')
 
 	    if (isSlide){ 
@@ -166,10 +188,11 @@ function route(req, res){ //route various requests to their proper functions
 
 		//MIDDLE!!! (content)
 		res.write("<div class='text'>")
+		console.log(data)
 		res.write(data)
 		res.write("</div>")
 		
-		res.end("</html>")
+		res.end("</body></html>")
 		return
 	    }
 
@@ -243,7 +266,7 @@ function route(req, res){ //route various requests to their proper functions
 	    else if (name == 'info')
 		include('info.js')
 	    
-	    res.end("</html>")
+	    res.end("</body></html>")
 	}
     }
 
