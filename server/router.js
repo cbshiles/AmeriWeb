@@ -68,25 +68,19 @@ function route(req, res){ //route various requests to their proper functions
     //special treatment
     if (name+'.'+xten == 'beginSlides.x'){
 
-// 	var queryData = url.parse(req.url, true).query;
-// 	var file
-// 	if (queryData['energy'] == '' || queryData['energy'] == null){
-// 	    file = 'h'
-// 	} else {
-// 	    file = 'e'
-// 	}
+	var queryData = url.parse(req.url, true).query;
+	var file
+	if (queryData['energy'] == '' || queryData['energy'] == null){
+	    file = 'h'
+	} else {
+	    file = 'e'
+	}
 
-
-	
-// 	xten = 'html'
-// 	final_path = 'client/'+file+'0.html'
-//	data =     fs.readFile(final_path, readF)
-// 	request(final_path, readF)
-// 	return
-
-	req.path = req.url = 'e0.html'
-	route(req, res)
-	return
+	name = file+'0'
+	xten = 'html'
+	var fname = name+'.'+xten
+	final_path = "client/"+fname
+	res.setHeader("Location", fname)
     }
 
     if (xten == 'html'){
@@ -102,7 +96,8 @@ function route(req, res){ //route various requests to their proper functions
 	readF = function(err, data) { //the official html reader function
 	    res.writeHead(200, { 'Content-Type': "text/html" });
 	    res.write('<!DOCTYPE html>')
-	    res.write('<html><head><base href="/" target="_blank">')
+	    var targ = (name == 'index')?'_self':'_blank'
+	    res.write('<html><head><base href="/" target="'+targ+'">')
 
 	    var id = name.substring(0,1)
 	    var rest = name.substring(1) //name(minus 1st char) 
