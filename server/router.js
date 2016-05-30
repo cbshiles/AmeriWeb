@@ -169,7 +169,7 @@ function route(req, res){ //route various requests to their proper functions
 		//RIGHT!!!
 
 		if (slideNum == -1){ //source
-		    murl = "info.html?letter="+id
+		    murl = id+"survey.html?letter="+id
 		} else if (slideNum < pages) {
 		    murl = id + (slideNum+1).toString() + '.html'
 		} else {
@@ -260,6 +260,8 @@ function route(req, res){ //route various requests to their proper functions
 		include(name+'.js')
 	    else if (name == 'info')
 		include('info.js')
+	    else if (name == 'index')
+		include('index.js')
 	    
 	    res.end("</body></html>")
 	}
