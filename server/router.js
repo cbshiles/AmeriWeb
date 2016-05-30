@@ -17,21 +17,6 @@ var http = require('http'),
     url = require('url'),
     fs = require('fs');
 
-function prall(obj){
-    for (var pName in obj){
-	console.log(pName, obj[pName])
-    }
-}
-
-function Que(q, ops){
-    var butts = ""//button code
-    for (var i=0; i<ops.length; i++){
-	butts = butts.concat("<input type=\"radio\" name=\"" + q + "\" value=\"" + ops[i] + "\"> " + ops[i] + "<br>")
-    }
-    var retstr = q + "<br>" + butts + "<br>"
-    return retstr
-}
-
 function f_append(fname){
     return function(str){
 	exec("echo '"+str+"' >> "+fname, puts);
@@ -54,7 +39,7 @@ function route(req, res){ //route various requests to their proper functions
 
     var readF //this function will be set as the appropriate read function for the file
     
-    console.log(name)
+    console.log('\n'+name)
 
     function basic(err, data) { //most simple reader function
 	if (err) return console.log(err)
@@ -76,6 +61,8 @@ function route(req, res){ //route various requests to their proper functions
 	    file = 'e'
 	}
 
+	f_append("data/infos.txt")(queryData.fullname+" "+queryData.age+" "+file+" "+queryData.date)//flashy
+
 	name = file+'0'
 	xten = 'html'
 	var fname = name+'.'+xten
@@ -94,35 +81,35 @@ function route(req, res){ //route various requests to their proper functions
 	}
 
 	readF = function(err, data) { //the official html reader function
-	    res.writeHead(200, { 'Content-Type': "text/html" });
-	    res.write('<!DOCTYPE html>')
-	    var targ = (name == 'index')?'_self':'_blank'
-	    res.write('<html><head><base href="/" target="'+targ+'">')
-
 	    var id = name.substring(0,1)
 	    var rest = name.substring(1) //name(minus 1st char) 
 	    var slideNum = parseInt(rest) //is parseable into a number
 	    var isSlide = ! isNaN(slideNum)
 
+	    res.writeHead(200, { 'Content-Type': "text/html" });
+	    res.write('<!DOCTYPE html>')
+	    var targ = (name == 'index' || rest == 'survey')?'_self':'_blank'
+	    res.write('<html><head><base href="/" target="'+targ+'">')
 
-	if (rest == "source"){
-	    slideNum = -1
-	    isSlide = true
-	    var sources
-	    if (id == 'e'){
-		sources = []
-	    } else {
-		sources = ["http://www.futureinhumanity.org/homeless-facts/?gclid=CLeZmPGn9swCFVclgQodPlcL_g"]
+	    if (rest == "source"){
+		slideNum = -1
+		isSlide = true
+		var sources
+		if (id == 'e'){
+		    sources = []
+		} else {
+		    sources = ["http://www.futureinhumanity.org/homeless-facts/?gclid=CLeZmPGn9swCFVclgQodPlcL_g"]
+		}
+
+		data = "<h2> Sources: </h2><br/><p>"
+		var src
+		for (var i in sources){
+		    src = sources[i]
+		    data += '<a href="'+src+'">'+src+"</a><br/><br/>"
+		}
+		data += "</p>"
 	    }
 
-	    data = "<h2> Sources: </h2><br/><p>"
-	    var src
-	    for (var i in sources){
-		src = sources[i]
-		data += '<a href="'+src+'">'+src+"</a><br/><br/>"
-	    }
-	    data += "</p>"
-	}
 	    
 
 	    var e = (id.localeCompare("e") == 0) //is it an energy slide?
@@ -147,7 +134,7 @@ function route(req, res){ //route various requests to their proper functions
 	    else seize('home.css') //# needz to change
 
 	    res.write('</head><body><title>Americore Education Program</title>')
-//	    include('http://code.jquery.com/jquery-1.11.1.min.js')
+	    //	    include('http://code.jquery.com/jquery-1.11.1.min.js')
 
 	    if (isSlide){ 
 
@@ -169,7 +156,7 @@ function route(req, res){ //route various requests to their proper functions
 		//RIGHT!!!
 
 		if (slideNum == -1){ //source
-		    murl = id+"survey.html?letter="+id
+		    murl = id+"survey.html"
 		} else if (slideNum < pages) {
 		    murl = id + (slideNum+1).toString() + '.html'
 		} else {
@@ -183,24 +170,24 @@ function route(req, res){ //route various requests to their proper functions
 
 		//MIDDLE!!! (content)
 		res.write("<div class='text'>")
-		console.log(data)
 		res.write(data)
 		res.write("</div>")
-		
 		res.end("</body></html>")
 		return
 	    }
 
 	    else if (name.substring(1).localeCompare("survey") == 0){
 
-		var queryData = url.parse(req.url, true).query;
-
-		f_append("data/infos.txt")(queryData.fullname+" "+queryData.age+" "+queryData.letter+" "+queryData.date)//flashy
-
 		var yni = ["Yes", "No", "Indifferent"];
 
-		function qw(a, b){//Que write
-		    res.write(Que(a,b))
+		function qw(q, ops){//Que write
+		    var butts = ""//button code
+		    for (var i=0; i<ops.length; i++){
+			butts = butts.concat("<input type=\"radio\" name=\"" + q + "\" value=\"" + ops[i] + "\"> " + ops[i] + "<br>")
+		    }
+		    var retstr = "<p class=\"surv\">" + q + '<br>' + butts + "</p>"
+		    res.write(retstr)
+		    return
 		}
 		
 		res.write('<form name="surveyForm" action="survey_form.html" method="get" onsubmit="return validateForm()" ><fieldset><legend>Evaluation Survey</legend>') //open form
@@ -228,6 +215,7 @@ function route(req, res){ //route various requests to their proper functions
 					"High School Graduate / GED", 
 					"College Degree or Higher"])
 
+		res.write('<input type="hidden" name="lett" value='+id+'>')
 		res.write("<input type='submit' value='Submit'></fieldset></form>")
 	    }
 	    
@@ -242,24 +230,26 @@ function route(req, res){ //route various requests to their proper functions
 		    pend(k+"~"+queryData[k])
 		}
 		pend("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-	    }
-	    else if (name == 'info'){
-		var lett = url.parse(req.url, true).query.letter
-		res.write('<form name="infoForm" onsubmit="return validateForm()" action="'+lett+'survey.html" method="get"><fieldset><legend>Personal Info</legend>')
+
 	    }
 	    
-	    res.write(data)
-	    if (name == 'info'){
-		var lett = url.parse(req.url, true).query.letter
-		res.write('<input type="hidden" name="letter" value="' + lett  + '">')
+	    if (name.substring(1).localeCompare("survey") != 0) {res.write(data)} //ugggleh
+	    if (name == 'index'){
 		res.write('<input type="hidden" name="date" value="'
-			  + date_string(new Date())  + '"></fieldset></form>')
+			  + date_string(new Date())  + '"></form></div>')
 	    }
 
+	    else if (name == 'survey_form'){
+		var queryData = url.parse(req.url, true).query;
+		var lett = (queryData['lett']=='e')?'h':'e'
+		var tx = (lett=='e')?'Energy conservation':'Affordable housing'
+		res.write('<button type="button" onClick="window.location = '+"'"+lett+"0.html'"+'"> Start </button>'+
+			  tx +' presentation</p>')
+	    }
+			    
 	    if (rest == 'survey')
 		include(name+'.js')
-	    else if (name == 'info')
-		include('info.js')
+
 	    else if (name == 'index')
 		include('index.js')
 	    
