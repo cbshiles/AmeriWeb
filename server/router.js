@@ -96,7 +96,7 @@ function route(req, res){ //route various requests to their proper functions
 		isSlide = true
 		var sources
 		if (id == 'e'){
-		    sources = []
+		    sources = ["http://www.data360.org/dsg.aspx?Data_Set_Group_Id=757"]
 		} else {
 		    sources = ["http://www.futureinhumanity.org/homeless-facts/?gclid=CLeZmPGn9swCFVclgQodPlcL_g"]
 		}
@@ -261,7 +261,7 @@ function route(req, res){ //route various requests to their proper functions
 	res.writeHead(200, { 'Content-Type': "text/css" });
 
     //test this
-    if (/(jpg|jpeg|png)/.test(xten))
+    if (/(jpg|jpeg|png|gif)/.test(xten))
 	final_path = "./img"+path
     
     fs.readFile(final_path, readF)
