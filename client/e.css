@@ -1,7 +1,16 @@
 /*Energy style!*/
 
+img.r_float {
+    float: right;
+    margin: 1% 1% 1% 1%;
+}
+
 ul.a {
     list-style-type: circle;
+}
+
+li {
+    font-size: 110%;
 }
 
 p {

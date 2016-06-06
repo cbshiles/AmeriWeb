@@ -43,7 +43,9 @@ function route(req, res){ //route various requests to their proper functions
 
     function basic(err, data) { //most simple reader function
 	if (err) return console.log(err)
-	res.end(data)
+
+	if (typeof(data) != "undefined")
+	    res.end(data)
     }
 
     //standard treatment
@@ -96,9 +98,9 @@ function route(req, res){ //route various requests to their proper functions
 		isSlide = true
 		var sources
 		if (id == 'e'){
-		    sources = ["http://www.data360.org/dsg.aspx?Data_Set_Group_Id=757"]
+		    sources = ["http://www.kub.org/wps/portal/Customers/Home/MoneySavingTips", "http://www.data360.org/dsg.aspx?Data_Set_Group_Id=757","http://energy.gov/energysaver/adding-insulation-existing-home",  "https://www.energystar.gov/"]
 		} else {
-		    sources = ["http://www.futureinhumanity.org/homeless-facts/?gclid=CLeZmPGn9swCFVclgQodPlcL_g"]
+		    sources = ["http://www.futureinhumanity.org/homeless-facts/?gclid=CLeZmPGn9swCFVclgQodPlcL_g", "http://portal.hud.gov/hudportal/HUD?src=/program_offices/comm_planning/affordablehousing/", "https://www.hudexchange.info/programs/home/home-laws-and-regulations/", "http://www.ebho.org/resources/looking-for-housing/steps-to-find-affordable-housing"]
 		}
 
 		data = "<h2> Sources: </h2><br/><p>"
@@ -170,7 +172,10 @@ function route(req, res){ //route various requests to their proper functions
 
 		//MIDDLE!!! (content)
 		res.write("<div class='text'>")
-		res.write(data)
+		if (typeof(data) == "undefined")
+		    data = "<h3> Problem loading page. </h3>"
+		else
+		    res.write(data)
 		res.write("</div>")
 		res.end("</body></html>")
 		return
@@ -233,7 +238,12 @@ function route(req, res){ //route various requests to their proper functions
 
 	    }
 	    
-	    if (name.substring(1).localeCompare("survey") != 0) {res.write(data)} //ugggleh
+	    if (name.substring(1).localeCompare("survey") != 0) {
+		if (typeof(data) == "undefined")
+		    data = "<h3> Problem loading page. </h3>"
+		else
+		    res.write(data)
+	    } //ugggleh
 	    if (name == 'index'){
 		res.write('<input type="hidden" name="date" value="'
 			  + date_string(new Date())  + '"></form></div>')
