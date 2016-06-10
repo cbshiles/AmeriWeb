@@ -1,84 +1,22 @@
 
-I can now easily identify ways to save energy in my daily life.~No
+I can now easily identify ways to save energy in my daily life.~Yes
 I understand and can explain how saving energy can reduce my environmental footprint.~Yes
-I am more likely to modify my behavior to improve energy efficiency.~No
+I am more likely to modify my behavior to improve energy efficiency.~Yes
 Being environmentally conscious improves the environment.~Yes
-Gender:~Female
-I live in a:~Rural Area
+Gender:~Male
+I live in a:~Urban Area
 Income Level:~Low
-Education Level:~Did Not Graduate High School
+Education Level:~College Degree or Higher
+lett~e
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 I have an increased knowledge and/or ability to access appropriate housing.~Yes
 I am more likely to pursue services and support available to me.~Yes
 I have a better understanding of how to manage resources.~Yes
-Gender:~Female
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~Yes
-I understand and can explain how saving energy can reduce my environmental footprint.~No
-I am more likely to modify my behavior to improve energy efficiency.~Yes
-Being environmentally conscious improves the environment.~Yes
-Gender:~Female
-I live in a:~Rural Area
+Gender:~Male
+lett~h
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 I have an increased knowledge and/or ability to access appropriate housing.~Yes
-I am more likely to pursue services and support available to me.~No
+I am more likely to pursue services and support available to me.~Yes
 I have a better understanding of how to manage resources.~Yes
-Gender:~Female
-I live in a:~Urban Area
-Income Level:~Low
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Education Level:~Did Not Graduate High School
-I can now easily identify ways to save energy in my daily life.~Yes
-I understand and can explain how saving energy can reduce my environmental footprint.~Yes
-I am more likely to modify my behavior to improve energy efficiency.~Yes
-Being environmentally conscious improves the environment.~No
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~No
-I understand and can explain how saving energy can reduce my environmental footprint.~No
-I am more likely to modify my behavior to improve energy efficiency.~No
-Being environmentally conscious improves the environment.~No
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~Indifferent
-I understand and can explain how saving energy can reduce my environmental footprint.~No
-I am more likely to modify my behavior to improve energy efficiency.~Indifferent
-Being environmentally conscious improves the environment.~Indifferent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~Indifferent
-I understand and can explain how saving energy can reduce my environmental footprint.~No
-I am more likely to modify my behavior to improve energy efficiency.~Indifferent
-Being environmentally conscious improves the environment.~Indifferent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~Indifferent
-I understand and can explain how saving energy can reduce my environmental footprint.~No
-I am more likely to modify my behavior to improve energy efficiency.~Indifferent
-Being environmentally conscious improves the environment.~Indifferent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~Indifferent
-I understand and can explain how saving energy can reduce my environmental footprint.~Indifferent
-I am more likely to modify my behavior to improve energy efficiency.~Indifferent
-Being environmentally conscious improves the environment.~Indifferent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~No
-I understand and can explain how saving energy can reduce my environmental footprint.~Yes
-I am more likely to modify my behavior to improve energy efficiency.~Yes
-Being environmentally conscious improves the environment.~No
-lett~e
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~Indifferent
-I understand and can explain how saving energy can reduce my environmental footprint.~No
-I am more likely to modify my behavior to improve energy efficiency.~No
-Being environmentally conscious improves the environment.~Yes
-lett~e
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~Indifferent
-I understand and can explain how saving energy can reduce my environmental footprint.~Indifferent
-I am more likely to modify my behavior to improve energy efficiency.~Indifferent
-Being environmentally conscious improves the environment.~Indifferent
-lett~e
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I can now easily identify ways to save energy in my daily life.~No
-I understand and can explain how saving energy can reduce my environmental footprint.~No
-I am more likely to modify my behavior to improve energy efficiency.~Indifferent
-Being environmentally conscious improves the environment.~No
-lett~e
+lett~h
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

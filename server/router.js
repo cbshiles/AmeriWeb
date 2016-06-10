@@ -253,7 +253,7 @@ function route(req, res){ //route various requests to their proper functions
 		var queryData = url.parse(req.url, true).query;
 		var lett = (queryData['lett']=='e')?'h':'e'
 		var tx = (lett=='e')?'Energy conservation':'Affordable housing'
-		res.write('<button type="button" onClick="window.location = '+"'"+lett+"0.html'"+'"> Start </button>'+
+		res.write('<br><button type="button" onClick="window.location = '+"'"+lett+"0.html'"+'"> Start </button>'+
 			  tx +' presentation</p>')
 	    }
 			    
