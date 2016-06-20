@@ -135,7 +135,7 @@ function route(req, res){ //route various requests to their proper functions
 	    if (isSlide) seize(id+".css") //each slide show has own css, each slide corresponds to a letter
 	    else seize('home.css') //# needz to change
 
-	    res.write('</head><body><title>Americore Education Program</title>')
+	    res.write('</head><body><title>Americorps Education Program</title>')
 	    //	    include('http://code.jquery.com/jquery-1.11.1.min.js')
 
 	    if (isSlide){ 
