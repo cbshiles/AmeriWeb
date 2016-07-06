@@ -1891,3 +1891,8 @@ Income Level:~Low
 Education Level:~College Degree or Higher
 lett~e
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I have an increased knowledge and/or ability to access appropriate housing.~Yes
+I am more likely to pursue services and support available to me.~Yes
+I have a better understanding of how to manage resources.~Yes
+lett~h
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
