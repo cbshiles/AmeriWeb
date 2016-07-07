@@ -1896,3 +1896,49 @@ I am more likely to pursue services and support available to me.~Yes
 I have a better understanding of how to manage resources.~Yes
 lett~h
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I have an increased knowledge and/or ability to access appropriate housing.~Yes
+I am more likely to pursue services and support available to me.~Indifferent
+I have a better understanding of how to manage resources.~Yes
+Gender:~Female
+I live in a:~Urban Area
+Income Level:~Low
+Education Level:~College Degree or Higher
+lett~h
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I can now easily identify ways to save energy in my daily life.~Yes
+I understand and can explain how saving energy can reduce my environmental footprint.~Yes
+I am more likely to modify my behavior to improve energy efficiency.~Yes
+Being environmentally conscious improves the environment.~Yes
+Gender:~Female
+I live in a:~Urban Area
+Income Level:~Low
+Education Level:~College Degree or Higher
+lett~e
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I have an increased knowledge and/or ability to access appropriate housing.~Yes
+I am more likely to pursue services and support available to me.~Yes
+I have a better understanding of how to manage resources.~Yes
+Gender:~Male
+I live in a:~Urban Area
+Income Level:~Moderate
+Education Level:~College Degree or Higher
+lett~h
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I have an increased knowledge and/or ability to access appropriate housing.~Indifferent
+I am more likely to pursue services and support available to me.~Yes
+I have a better understanding of how to manage resources.~Indifferent
+Gender:~Male
+I live in a:~Rural Area
+Income Level:~Low
+Education Level:~High School Graduate / GED
+lett~h
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I have an increased knowledge and/or ability to access appropriate housing.~Yes
+I am more likely to pursue services and support available to me.~No
+I have a better understanding of how to manage resources.~Indifferent
+Gender:~Male
+I live in a:~Urban Area
+Income Level:~Moderate
+Education Level:~College Degree or Higher
+lett~h
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
